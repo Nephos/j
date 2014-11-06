@@ -1,9 +1,9 @@
 #! /usr/bin/env ruby
 require 'rainbow'
 require 'optparse'
-require File.expand_path('../lib/j', File.dirname(__FILE__))
+require File.expand_path('../lib/jf', File.dirname(__FILE__))
 
-j = J.new
+jf = Jf.new
 
 validOptions = ["-a", "--all",
                 "-f", "--finished",
@@ -16,43 +16,35 @@ validOptions = ["-a", "--all",
 if ARGV.length > 0  and validOptions.include?(ARGV.first)
 
   options = OptionParser.new do |o|
-    o.banner = "j task manager"
+    o.banner = "jf task manager"
     
     o.on('-a', "--all", "List all tasks") do |b|
-      j.listTasks(:all)
+      jf.listTasks(:all)
       exit
     end
 
     o.on('-t', "--todo", "List todo. Same as using command without options") do |b|
-      j.listTasks(:todo)
+      jf.listTasks(:todo)
       exit
     end
     
     o.on('-f', "--finished", "List finished tasks") do |b|
-      j.listTasks(:done)
+      jf.listTasks(:done)
       exit
     end
   
     o.on('-m KEY', "--mark KEY", "Mark a task a completed") do |key|
-      if j.validKey key
-        j.markTask key
-      else
-        puts o
-      end
+      (jf.validKey(key) ? jf.markTask(key) : puts(o))
       exit
     end
   
     o.on('-d KEY', "--delete KEY", "Delete a task") do |key|
-      if j.validKey key
-        j.deleteTask key
-      else
-        puts o
-      end
+      (jf.validKey(key) ? jf.deleteTask(key) : puts(o))
       exit
     end
     
     o.on('-c', "--clear", "Clears the todo list") do |b|
-      j.clearList
+      jf.clearList
       exit
     end
 
@@ -65,24 +57,8 @@ if ARGV.length > 0  and validOptions.include?(ARGV.first)
 
   options.parse!
 
-elsif ARGV.length > 0
-  j.addTask ARGV.join(" ")
-elsif ARGV.length == 0
-  j.listTasks(:todo)
-end
-
-=begin
-if ARGV.count == 0
-  j.listTasks
-elsif ARGV.count == 1
-  j.listTasks(:done) if ARGV[0] == "-f"
-  j.listTasks(:all) if ARGV[0] == "-a"
-  j.clearList if ARGV[0]=="-c"
-elsif ARGV.count == 2 and ARGV.first == "-m"
-  j.markTask ARGV[1]
-elsif ARGV.count == 2 and ARGV.first == "-d"
-  j.deleteTask ARGV[1]
+elsif ARGV.empty?
+  jf.listTasks(:todo)
 else
-  j.addTask ARGV.join(" ")
+  jf.addTask ARGV.join(" ")
 end
-=end

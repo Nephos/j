@@ -1,6 +1,7 @@
 require 'etc'
 
-class J
+class Jf
+
   def initialize
     @tFilePath = "#{Dir.pwd}/.todo"
     if File.exists? @tFilePath
@@ -53,7 +54,7 @@ class J
       puts "No such task found!"
     end
   end
-  
+
   def clearList
     File.delete(@tFilePath) if File.exists?(@tFilePath)
     puts(@globalTodo ? "Cleared todo list" : "Cleared project todo list")
@@ -62,7 +63,7 @@ class J
   def validKey(key)
     return true unless key.match(/\A[0-9]+\Z/).nil?
   end 
-  
+
   private
 
   def dumpTasksToFile
@@ -73,12 +74,12 @@ class J
     end
     f.close
   end
-  
+
   def formatTask(task,key)
     return ("[" + key.to_s.foreground(:black).background(:white).bright + "]".background(:white)).background(:white) + \
       " " + task[:status].foreground((task[:status] =="TODO" ? :red : :green)).bright + " " + task[:title]
   end
-  
+
   def tFile(mode="r+")
     if File.exists?(@tFilePath)
       File.open(@tFilePath, mode)
@@ -86,7 +87,7 @@ class J
       File.new(@tFilePath, "w+")
     end
   end
-  
+
   def createTask(task)
     return "TODO #{task}"
   end

@@ -1,13 +1,14 @@
-j - task manager (v0.5.1)
+fj - task manager (v0.5.1)
 ==========================
 
-j, stands for jot and is a simple command-line task manager written in Ruby. Inspired by [t-](http://www.penzba.co.uk/t-/t-.html) which was written in Python.
+jf, stands for jot and is a simple command-line task manager written in Ruby. Inspired by [t-](http://www.penzba.co.uk/t-/t-.html) which was written in Python.
+_Jf is a fork of the J project_
 
 
 Install
 --------
 
-       gem install j
+       gem install jf
 
 Note
 -----
@@ -17,20 +18,20 @@ As of version 0.6.11, the executable is available as both "j" and "jot". So feel
 Usage
 -------
 
-* List todo tasks: `j`
+* List todo tasks: `jf`
 
-* List all tasks: `j -a`
+* List all tasks: `jf -a`
 
-* List finished tasks: `j -f`
+* List finished tasks: `jf -f`
 
-* Mark a task as done: `j -m <key>`
-  For example: `j -m 3`
+* Mark a task as done: `jf -m <key>`
+  For example: `jf -m 3`
 
-* Delete a task: `j -d <key>`
+* Delete a task: `jf -d <key>`
 
-* Clear task list by deleting the *.todo* file (will be recreated later when needed): `j -c`
+* Clear task list by deleting the *.todo* file (will be recreated later when needed): `jf -c`
 
-* Display the scroll to use the magic: `j -h`
+* Display the scroll to use the magic: `jf -h`
 
 Key is a number that you will find next to a task, when you list tasks. It isn't the same everytime. So watch out!
 
